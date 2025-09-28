@@ -1,0 +1,14 @@
+# Dependencies
+node_modules/
+
+# Expo local files
+.expo/
+
+# Build and cache
+dist/
+build/
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db

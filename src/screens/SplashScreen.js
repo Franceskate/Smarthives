@@ -1,17 +1,15 @@
-import React, { useEffect } from "react";
-import { View, Text, ActivityIndicator } from "react-native";
+import React from "react";
+import { View, ActivityIndicator, Text, StyleSheet } from "react-native";
 
-export default function SplashScreen({ navigation }) {
-  useEffect(() => {
-    setTimeout(() => {
-      navigation.replace("Login");
-    }, 2000);
-  }, []);
-
+export default function SplashScreen() {
   return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+    <View style={styles.container}>
       <ActivityIndicator size="large" />
-      <Text>Loading...</Text>
+      <Text style={{ marginTop: 12 }}>Loading...</Text>
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: { flex: 1, justifyContent: "center", alignItems: "center" },
+});

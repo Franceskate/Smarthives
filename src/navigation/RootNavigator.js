@@ -1,26 +1,13 @@
-import React, { useEffect, useState } from "react";
-import { supabase } from "../lib/supabase";
+import React from "react";
 import AuthStack from "./AuthStack";
-import AppTabs from "./AppTabs";
+import MainTabs from "./MainTabs";
+import SplashScreen from "../screens/SplashScreen";
+import { useAuth } from "../context/AuthContext";
 
 export default function RootNavigator() {
-  const [session, setSession] = useState(null);
+  const { user, loading } = useAuth();
 
-  useEffect(() => {
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(session);
-    });
+  if (loading) return <SplashScreen />;
 
-
-    const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
-      setSession(session);
-    });
-
-    return () => {
-      listener.subscription.unsubscribe();
-    };
-  }, []);
-
-
-  return session ? <AppTabs /> : <AuthStack />;
+  return user ? <MainTabs /> : <AuthStack />;
 }
